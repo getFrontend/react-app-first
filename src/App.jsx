@@ -7,7 +7,7 @@ function App() {
     <>
       <h1>Start Project</h1>
       <p>some text here</p>
-      <Button></Button>
+      <Button />
     </>
   );
 }

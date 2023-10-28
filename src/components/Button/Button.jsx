@@ -1,7 +1,9 @@
+import './Button.css';
+
 function Button() {
 
   return (
-    <button>Save</button>
+    <button className='button accent'>Save</button>
   );
 }
 
