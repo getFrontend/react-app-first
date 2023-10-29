@@ -1,13 +1,14 @@
 import './JournalItem.css';
 
-function JournalItem() {
+function JournalItem({ title, text, date }) {
+  const formatedDate = new Intl.DateTimeFormat('ua-UA').format(date);
 
   return (
     <div className="journal-item">
-      <h2 className="journal-item__title">Header</h2>
+      <h2 className="journal-item__title">{title}</h2>
       <div className="journal-item__content">
-        <p className="journal-item__date">1</p>
-        <p className="journal-item__text">2</p>
+        <p className="journal-item__date">{formatedDate}</p>
+        <p className="journal-item__text">{text}</p>
       </div>
     </div>
   );
