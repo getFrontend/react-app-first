@@ -1,34 +1,17 @@
 .button {
-  border-radius: 6px;
-  border: 1px solid transparent;
-  padding: 8px 30px;
-  font-family: inherit;
-  cursor: pointer;
-  transition: border-color 0.25s;
-
-  color: #FFF;
-
-  text-align: center;
-  font-family: Source Sans Pro;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 26px;
-}
-
-.button:hover {
-  border-color: #646cff;
-}
-
-.button:focus,
-.button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.accent {
-  background: #312EB5;
+	border-radius: 6px;
+	padding: 8px 30px;
+	font-family: inherit;
+	cursor: pointer;
+	transition: background 0.25s;
+	font-size: 16px;
+	border: none;
 }
 
 .accent:hover {
-  background-color: #4b53da;
+	background: #222096;
+}
+
+.accent {
+	background: #312EB5;
 }
