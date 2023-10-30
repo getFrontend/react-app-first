@@ -1,43 +1,51 @@
+import { useState } from 'react';
 import './App.css';
-import Button from './components/Button/Button';
-import CardButton from './components/CardButton/CardButton';
-import JournalItem from './components/JournalItem/JournalItem';
+import Header from './components/Header/Header';
+import JournalAddButton from './components/JournalAddButton/JournalAddButton';
+import JournalForm from './components/JournalForm/JournalForm';
+import JournalList from './components/JournalList/JournalList';
+import Body from './layouts/Body/Body';
+import LeftPanel from './layouts/LeftPanel/LeftPanel';
+
+const INITIAL_DATA = [
+	// {
+	// 	id: 1,
+	// 	title: 'Подготовка к обновлению курсов',
+	// 	text: 'Горные походы открывают удивительные природные ландшафт',
+	// 	date: new Date()
+	// },
+	// {
+	// 	id: 2,
+	// 	title: 'Поход в годы',
+	// 	text: 'Думал, что очень много времени',
+	// 	date: new Date()
+	// }
+];
 
 function App() {
-  const data = [
-    {
-      title: 'Our title',
-      text: 'Some big text and other text',
-      data: new Date()
-    },
-    {
-      title: 'Our title 2 AAA',
-      text: 'Some big AAA text and other text aaa',
-      data: new Date()
-    }
-  ];
+	const [items, setItems] = useState(INITIAL_DATA);
 
-  return (
-    <>
-      <h1>Start Project</h1>
-      <p>some text here</p>
-      <Button />
-      <CardButton>
-        <JournalItem
-          title={data[0].title}
-          text={data[0].text}
-          date={data[0].date}
-        />
-      </CardButton>
-      <CardButton>
-        <JournalItem
-          title={data[1].title}
-          text={data[1].text}
-          date={data[1].date}
-        />
-      </CardButton>
-    </>
-  );
+	const addItem = item => {
+		setItems(oldItems => [...oldItems, {
+			text: item.text,
+			title: item.title,
+			date: new Date(item.date),
+			id: oldItems.length > 0 ? Math.max(...oldItems.map(i => i.id)) + 1 : 1
+		}]);
+	};
+
+	return (
+		<div className='app'>
+			<LeftPanel>
+				<Header/>
+				<JournalAddButton/>
+				<JournalList items={items} />
+			</LeftPanel>
+			<Body>
+				<JournalForm onSubmit={addItem}/>
+			</Body>
+		</div>
+	);
 }
 
 export default App;
