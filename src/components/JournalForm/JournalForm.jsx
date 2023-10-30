@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import { useState } from 'react';
 
 function JournalForm({ onSubmit }) {
-	const [formVailState, setFormValidState] = useState(
+	const [formValidState, setFormValidState] = useState(
 		{
 			title: true,
 			text: true,
@@ -45,10 +45,10 @@ function JournalForm({ onSubmit }) {
 
 	return (
 		<form className='journal-form' onSubmit={addJournalItem}>
-			<input type='text' name='title' style={{ border: formVailState.title ? '1px solid transparent' : '1px solid orange' }} />
-			<input type='date' name='date' style={{ border: formVailState.date ? '1px solid transparent' : '1px solid orange' }} />
+			<input type='text' name='title' className={`input ${formValidState.title ? '' : 'invalid'}`} />
+			<input type='date' name='date' className={`input ${formValidState.date ? '' : 'invalid'}`} />
 			<input type='text' name='tag' />
-			<textarea name="text" id="" cols="30" rows="10" style={{border: formVailState.text ? '1px solid transparent' : '1px solid orange'}}></textarea>
+			<textarea name="text" id="" cols="30" rows="10" className={`input ${formValidState.text ? '' : 'invalid'}`} ></textarea>
 			<Button text="Сохранить" />
 		</form>
 	);
