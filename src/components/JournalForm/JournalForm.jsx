@@ -1,6 +1,6 @@
 import './JournalForm.css';
 import Button from '../Button/Button';
-import { useEffect, useReducer, useRef } from 'react';
+import { useContext, useEffect, useReducer, useRef } from 'react';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
 import Input from '../Input/Input';
 import { UserContext } from '../../context/user.context';
@@ -11,6 +11,7 @@ function JournalForm({ onSubmit }) {
 	const titleRef = useRef();
 	const dateRef = useRef();
 	const textRef = useRef();
+	const { userId } = useContext(UserContext);
 
 	const focusError = (isValid) => {
 		switch (true) {
@@ -56,18 +57,18 @@ function JournalForm({ onSubmit }) {
 	};
 
 	return (
-		<UserContext.Consumer>
-			{(context) => (
-				<form className='journal-form' onSubmit={addJournalItem}>
-					{context.userId}
-					<Input type='text' ref={titleRef} onChange={onChange} value={values.title} name='title' isValid={!isValid.title} />
-					<Input type='date' ref={dateRef} onChange={onChange} value={values.date} name='date' isValid={!isValid.date} />
-					<Input type='text' name='tag' />
-					<textarea name="text" ref={textRef} onChange={onChange} value={values.text} cols="30" rows="10" className={`input ${isValid.text ? '' : 'invalid'}`} ></textarea>
-					<Button text="Сохранить" />
-				</form>
-			)}
-		</UserContext.Consumer>
+
+
+		<form className='journal-form' onSubmit={addJournalItem}>
+			{userId}
+			<Input type='text' ref={titleRef} onChange={onChange} value={values.title} name='title' isValid={!isValid.title} />
+			<Input type='date' ref={dateRef} onChange={onChange} value={values.date} name='date' isValid={!isValid.date} />
+			<Input type='text' name='tag' />
+			<textarea name="text" ref={textRef} onChange={onChange} value={values.text} cols="30" rows="10" className={`input ${isValid.text ? '' : 'invalid'}`} ></textarea>
+			<Button text="Сохранить" />
+		</form>
+
+
 	);
 }
 
