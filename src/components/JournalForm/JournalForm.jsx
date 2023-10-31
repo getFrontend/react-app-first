@@ -1,8 +1,8 @@
 import './JournalForm.css';
 import Button from '../Button/Button';
 import { useEffect, useReducer, useRef } from 'react';
-import classNames from 'classnames';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
+import Input from '../Input/Input';
 
 function JournalForm({ onSubmit }) {
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
@@ -56,11 +56,9 @@ function JournalForm({ onSubmit }) {
 
 	return (
 		<form className='journal-form' onSubmit={addJournalItem}>
-			<input type='text' ref={titleRef} onChange={onChange} value={values.title} name='title' className={classNames('input', {
-				'invalid': !isValid.title
-			})} />
-			<input type='date' ref={dateRef} onChange={onChange} value={values.date} name='date' className={`input ${isValid.date ? '' : 'invalid'}`} />
-			<input type='text' name='tag' />
+			<Input type='text' ref={titleRef} onChange={onChange} value={values.title} name='title' isValid={!isValid.title} />
+			<Input type='date' ref={dateRef} onChange={onChange} value={values.date} name='date' isValid={!isValid.date} />
+			<Input type='text' name='tag' />
 			<textarea name="text" ref={textRef} onChange={onChange} value={values.text} cols="30" rows="10" className={`input ${isValid.text ? '' : 'invalid'}`} ></textarea>
 			<Button text="Сохранить" />
 		</form>
