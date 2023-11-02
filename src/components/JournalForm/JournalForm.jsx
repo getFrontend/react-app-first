@@ -47,6 +47,10 @@ function JournalForm({ onSubmit }) {
 		}
 	}, [isFormReadyToSubmit, onSubmit, values]);
 
+	useEffect(() => {
+		dispatchForm({ type: 'SET_VALUE', payload: { userId } });
+	}, [userId]);
+
 	const onChange = (e) => {
 		dispatchForm({ type: 'SET_VALUE', payload: { [e.target.name]: e.target.value } });
 	};
@@ -57,18 +61,13 @@ function JournalForm({ onSubmit }) {
 	};
 
 	return (
-
-
 		<form className='journal-form' onSubmit={addJournalItem}>
-			{userId}
 			<Input type='text' ref={titleRef} onChange={onChange} value={values.title} name='title' isValid={!isValid.title} />
 			<Input type='date' ref={dateRef} onChange={onChange} value={values.date} name='date' isValid={!isValid.date} />
 			<Input type='text' name='tag' />
 			<textarea name="text" ref={textRef} onChange={onChange} value={values.text} cols="30" rows="10" className={`input ${isValid.text ? '' : 'invalid'}`} ></textarea>
 			<Button text="Сохранить" />
 		</form>
-
-
 	);
 }
 
