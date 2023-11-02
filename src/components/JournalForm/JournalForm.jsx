@@ -42,15 +42,15 @@ function JournalForm({ onSubmit }) {
 	}, [isValid]);
 
 	useEffect(() => {
+		dispatchForm({ type: 'SET_VALUE', payload: { userId } });
+	}, [userId]);
+
+	useEffect(() => {
 		if (isFormReadyToSubmit) {
 			onSubmit(values);
 			dispatchForm({ type: 'CLEAR' });
 		}
 	}, [isFormReadyToSubmit, onSubmit, values]);
-
-	useEffect(() => {
-		dispatchForm({ type: 'SET_VALUE', payload: { userId } });
-	}, [userId]);
 
 	const onChange = (e) => {
 		dispatchForm({ type: 'SET_VALUE', payload: { [e.target.name]: e.target.value } });
@@ -71,7 +71,7 @@ function JournalForm({ onSubmit }) {
 					<img src='./img/icon-calendar.svg' alt='Иконка календаря' />
 					<span>Дата</span>
 				</label>
-				<Input type='date' ref={dateRef} onChange={onChange} name='date' value={values.date} id="date" isValid={!isValid.title} />
+				<Input type='date' ref={dateRef} onChange={onChange} name='date' value={values.date} id="date" isValid={!isValid.date} />
 			</div>
 			<div className={styles['form-row']}>
 				<label htmlFor="tag" className={styles['form-label']}>
