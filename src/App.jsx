@@ -22,12 +22,13 @@ function App() {
 	const [items, setItems] = useLocalStorage('data');
 
 	const addItem = item => {
-		setItems([...mapItems(items), {
+		console.log(items);
+		setItems([mapItems(items), {
 			// text: item.text,
 			// title: item.title,
 			...item,
-			// date: new Date(item.date),
-			id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1
+			date: new Date(item.date),
+			id: items ? Math.max(...items.map(i => i.id)) + 1 : 1
 		}]);
 	};
 
