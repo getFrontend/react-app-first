@@ -8,7 +8,7 @@ export const useLocalStorage = (key) => {
     if (res) {
       setData(res);
     }
-  }, []);
+  }, [key]);
 
   const saveData = (newData) => {
     localStorage.setItem(key, JSON.stringify(newData));
