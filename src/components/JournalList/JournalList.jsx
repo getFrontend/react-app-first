@@ -4,7 +4,7 @@ import JournalItem from '../JournalItem/JournalItem';
 import { useContext, useMemo } from 'react';
 import { UserContext } from '../../context/user.context';
 
-function JournalList({ items }) {
+function JournalList({ items, setItem }) {
 	const { userId } = useContext(UserContext);
 
 	const sortItems = (a, b) => {
@@ -19,14 +19,15 @@ function JournalList({ items }) {
 		.filter(el => el.userId === userId)
 		.sort(sortItems), [items, userId]);
 
+	console.log(items);
 	if (items.length === 0) {
-		return <p>Записей пока нет, добавьте первую</p>;
+		return <p>Записей пока нет, пожалуйста, добавьте первую запись, заполнив текстовое поле и название в правой колонке.</p>;
 	}
 
 	return <>
 		{filteredItems
 			.map(el => (
-				<CardButton key={el.id}>
+				<CardButton key={el.id} onClick={() => setItem(el)}>
 					<JournalItem
 						title={el.title}
 						text={el.text}

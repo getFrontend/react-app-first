@@ -6,7 +6,7 @@ import { INITIAL_STATE, formReducer } from './JournalForm.state';
 import Input from '../Input/Input';
 import { UserContext } from '../../context/user.context';
 
-function JournalForm({ onSubmit }) {
+function JournalForm({ onSubmit, data }) {
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const titleRef = useRef();
@@ -29,6 +29,10 @@ function JournalForm({ onSubmit }) {
 	};
 
 	useEffect(() => {
+		dispatchForm({ type: 'SET_VALUE', payload: { ...data } });
+	}, [data]);
+
+	useEffect(() => {
 		let timerId;
 		if (!isValid.title || !isValid.data || !isValid.text) {
 			focusError(isValid);
@@ -42,15 +46,16 @@ function JournalForm({ onSubmit }) {
 	}, [isValid]);
 
 	useEffect(() => {
-		dispatchForm({ type: 'SET_VALUE', payload: { userId } });
-	}, [userId]);
-
-	useEffect(() => {
 		if (isFormReadyToSubmit) {
 			onSubmit(values);
 			dispatchForm({ type: 'CLEAR' });
+			dispatchForm({ type: 'SET_VALUE', payload: { userId } });
 		}
-	}, [isFormReadyToSubmit, onSubmit, values]);
+	}, [isFormReadyToSubmit, onSubmit, values, userId]);
+
+	useEffect(() => {
+		dispatchForm({ type: 'SET_VALUE', payload: { userId } });
+	}, [userId]);
 
 	const onChange = (e) => {
 		dispatchForm({ type: 'SET_VALUE', payload: { [e.target.name]: e.target.value } });
