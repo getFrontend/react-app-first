@@ -19,7 +19,6 @@ function JournalList({ items, setItem }) {
 		.filter(el => el.userId === userId)
 		.sort(sortItems), [items, userId]);
 
-	console.log(items);
 	if (items.length === 0) {
 		return <p>Записей пока нет, пожалуйста, добавьте первую запись, заполнив текстовое поле и название в правой колонке.</p>;
 	}
